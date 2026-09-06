@@ -1,53 +1,44 @@
-# RDS Module
-
 variable "environment" {
-  description = "Environment name"
   type        = string
+  description = "Deployment environment"
 }
 
 variable "vpc_id" {
-  description = "VPC ID"
   type        = string
+  description = "VPC ID"
+  default     = ""
 }
 
 variable "subnet_ids" {
-  description = "List of subnet IDs for RDS"
   type        = list(string)
-}
-
-variable "security_group_ids" {
-  description = "List of security group IDs"
-  type        = list(string)
-}
-
-variable "db_name" {
-  description = "Database name"
-  type        = string
+  description = "Subnet IDs for DB subnet group"
 }
 
 variable "db_username" {
-  description = "Database username"
   type        = string
-  sensitive   = true
+  description = "Master username for database"
 }
 
 variable "db_password" {
-  description = "Database password"
   type        = string
+  description = "Master password for database"
   sensitive   = true
 }
 
-output "rds_instance_id" {
-  description = "RDS instance ID"
-  value       = aws_db_instance.main.id
+variable "db_security_group_id" {
+  type        = string
+  description = "Security group ID for database"
+  default     = ""
 }
 
-output "rds_instance_endpoint" {
-  description = "RDS instance endpoint"
-  value       = aws_db_instance.main.endpoint
+variable "security_group_ids" {
+  type        = list(string)
+  description = "Security group IDs for database"
+  default     = []
 }
 
-output "rds_instance_port" {
-  description = "RDS instance port"
-  value       = aws_db_instance.main.port
+variable "db_name" {
+  type        = string
+  description = "Database name"
+  default     = "javaapp"
 }

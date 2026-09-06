@@ -1,56 +1,62 @@
-# ASG Module
-
 variable "environment" {
-  description = "Environment name"
   type        = string
+  description = "Deployment environment"
 }
 
 variable "vpc_id" {
-  description = "VPC ID"
   type        = string
+  description = "VPC ID"
+}
+
+variable "subnet_ids" {
+  type        = list(string)
+  description = "Subnet IDs for the Auto Scaling Group"
+  default     = []
 }
 
 variable "private_subnet_ids" {
-  description = "List of private subnet IDs"
   type        = list(string)
-}
-
-variable "security_group_ids" {
-  description = "List of security group IDs"
-  type        = list(string)
+  description = "Private Subnet IDs for the Auto Scaling Group"
+  default     = []
 }
 
 variable "target_group_arns" {
-  description = "List of target group ARNs"
   type        = list(string)
+  description = "Target Group ARNs for the ASG"
+  default     = []
 }
 
-variable "instance_type" {
-  description = "EC2 instance type"
-  type        = string
+variable "security_group_ids" {
+  type        = list(string)
+  description = "Security Group IDs for application instances"
+  default     = []
 }
 
 variable "key_name" {
-  description = "SSH key pair name"
   type        = string
+  description = "SSH key pair name"
+}
+
+variable "instance_type" {
+  type        = string
+  description = "EC2 Instance Type"
+  default     = "t2.micro"
 }
 
 variable "min_size" {
-  description = "Minimum size of ASG"
   type        = number
+  description = "Minimum size of ASG"
+  default     = 2
 }
 
 variable "max_size" {
-  description = "Maximum size of ASG"
   type        = number
+  description = "Maximum size of ASG"
+  default     = 5
 }
 
 variable "desired_capacity" {
-  description = "Desired capacity of ASG"
   type        = number
-}
-
-output "asg_name" {
-  description = "Auto Scaling Group name"
-  value       = aws_autoscaling_group.main.name
+  description = "Desired capacity of ASG"
+  default     = 2
 }
