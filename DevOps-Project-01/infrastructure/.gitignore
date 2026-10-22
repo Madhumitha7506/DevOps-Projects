@@ -1,0 +1,6 @@
+*.pem
+terraform.tfvars
+.terraform/
+.terraform.lock.hcl
+console.log
+url

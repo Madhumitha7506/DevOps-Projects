@@ -1,6 +1,3 @@
-# Security Groups Module
-
-# ALB Security Group
 resource "aws_security_group" "alb" {
   name        = "${var.environment}-alb-sg"
   description = "Security group for application load balancer"
@@ -33,7 +30,6 @@ resource "aws_security_group" "alb" {
   }
 }
 
-# Application Security Group
 resource "aws_security_group" "app" {
   name        = "${var.environment}-app-sg"
   description = "Security group for application servers"
@@ -66,7 +62,6 @@ resource "aws_security_group" "app" {
   }
 }
 
-# Database Security Group
 resource "aws_security_group" "db" {
   name        = "${var.environment}-db-sg"
   description = "Security group for database"
@@ -92,7 +87,6 @@ resource "aws_security_group" "db" {
   }
 }
 
-# Bastion Host Security Group
 resource "aws_security_group" "bastion" {
   name        = "${var.environment}-bastion-sg"
   description = "Security group for bastion host"
@@ -102,7 +96,7 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.allowed_ssh_cidr_blocks
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -116,4 +110,4 @@ resource "aws_security_group" "bastion" {
     Name        = "${var.environment}-bastion-sg"
     Environment = var.environment
   }
-} 
+}
